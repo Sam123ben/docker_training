@@ -1,0 +1,15 @@
+jenkinsdata:
+ build: jenkins-server
+jenkinsnginx:
+ image: nginx:latest
+ ports:
+   - "80:80"
+   - "443:443"
+ volumes:
+   - ./nginx/default.conf:/etc/nginx/default.conf
+   - ./nginx/conf.d:/etc/nginx/conf.d
+   - ./nginx/logs:/var/log/nginx
+   - ./nginx/ssl:/etc/nginx/ssl
+   - ./nginx/htpass:/etc/nginx/htpass
+ links:
+   - jenkinsdata:jenkinsdata
